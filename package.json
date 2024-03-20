@@ -1,0 +1,37 @@
+{
+  "name": "myy-next-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.2.1",
+    "axios": "^1.6.8",
+    "bcryptjs": "^2.4.3",
+    "chart.js": "^4.4.2",
+    "firebase": "^10.8.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.2.2",
+    "next": "14.1.0",
+    "nodemailer": "^6.9.12",
+    "phosphor-react": "^1.4.1",
+    "react": "^18",
+    "react-calendar": "^4.8.0",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18",
+    "react-redux": "^9.1.0",
+    "react-toastify": "^10.0.5",
+    "redux": "^5.0.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0"
+  }
+}
