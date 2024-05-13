@@ -1,4 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+
 
 
 const initialState = {
@@ -6,19 +9,14 @@ const initialState = {
   darkMode: false,
   expenses: [
     {
-      category: "Food",
-      name: "rahmannnn",
-      amount: 9000,
+      id: '',
+      category: "",
+      name: "",
+      amount: 0,
     },
   ],
   notificationCount: 0,
-  revenues: [
-    {
-      name: "rahmannnn",
-      amount: 9000,
-    },
-  ],
-  budgets : [],
+
   loading: false,
   error: null,
 };
@@ -32,36 +30,36 @@ const initialState = {
       setExpenses(state, action) {
         state.expenses = action.payload;
       },
+      setLoading(state, action) {
+        state.loading = action.payload
+      },
+       setError(state, action) {
+        state.error = action.payload
+      },
       addExpense(state, action) {
         state.expenses.push(action.payload);
       },
-      addRevenue(state, action) {
-        state.revenues.push(action.payload);
+      addExpenseFailure(state, action) {
+        state.error = action.payload
+        
       },
-      addBudget(state, action) {
-        state.budgets.push(action.payload);
+       deleteExpense : (state, action) => {
+       return  state.expenses.filter((expense) => expense.id !== action.payload.id);
       },
+     
+      
+      
+      
       incrementNotificationCount(state) {
         state.notificationCount += 1;
       },
       resetNotificationCount(state) {
         state.notificationCount = 0;
       },
-      fetchExpensesStart(state) {
-        state.loading = true;
-        state.error = null;
-      },
-      fetchExpensesSuccess(state, action) {
-        state.loading = false;
-        state.error = null;
-        state.expenses = action.payload;
-      },
-      fetchExpensesFailure(state, action) {
-        state.loading = false;
-        state.error = action.payload;
-      },
+     
     },
+  
   });
 
- export const { setDarkMode,setExpenses, addExpense, incrementNotificationCount, resetNotificationCount, addRevenue,addBudget} = uiSlice.actions;
+ export const { setDarkMode, setExpenses, addExpense, incrementNotificationCount,addExpenseFailure, resetNotificationCount,  deleteExpense, setLoading, setError} = uiSlice.actions;
  export default uiSlice.reducer;

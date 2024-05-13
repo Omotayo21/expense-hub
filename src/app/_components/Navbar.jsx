@@ -1,26 +1,27 @@
 "use client"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link"
-import { MagnifyingGlass, Envelope, Bell, User, Moon, MoonStars } from "phosphor-react";
-import Create from "./Create";
+import {  Bell, User, MoonStars, List, House, Book, CurrencyDollar, PlusCircle, BellRinging, X, ChatTeardropDots } from "phosphor-react";
+
 import {useRouter} from "next/navigation";
 import { usePathname } from "next/navigation";
-import { resetNotificationCount, setDarkMode } from "@/redux/ui-slice";
+import { resetNotificationCount, setDarkMode } from "../../redux/ui-slice";
 import { useDispatch, useSelector } from "react-redux";
 
+import axios from "axios";
+import Header from "./Header";
 
 
 
-const Header = () => {
+const Navbar = () => {
  const { darkMode } = useSelector((state) => state.ui)
  const { notificationCount } = useSelector((state) => state.ui)
  const [theme, setTheme] = useState(false);
+   const [name, setName] = useState('No name yet')
  const dispatch = useDispatch();
  const router= useRouter();
-  const [ispopUp, setIspopUp] = useState(false);
-  const newExpense = () => {
-    setIspopUp(true)
-  }
+  const [isDropdown, setIsDropdown] = useState(false);
+ 
   const pathname = usePathname();
   const getPageName = (path) => {
     const routeMap = {
@@ -29,6 +30,9 @@ const Header = () => {
       "/notifications": "Notifications",
       "/transactions": "Transactions",
       "/profile": "Profile",
+      "/budget": "Budget",
+      "/add" : "Create",
+      "/about" : "About",
     };
     return routeMap[path]
     
@@ -40,31 +44,58 @@ const Header = () => {
   const reset = () =>{
     dispatch(resetNotificationCount())
   }
+  
+ const dropIt = () => {
+  setIsDropdown(!isDropdown)
+  }
+  const raise = () => {
+    setIsDropdown(false)
+  }
+
+
+
+  const getUserDetails = async () => {
+    const res = await axios.get('/api/users/me')
+      setName(res.data.data.username)
+   }
+useEffect(() => {
+  getUserDetails()
+},[])
 return (
   <>
     <div
-      className={`flex flex-row items-center w-full justify-center lg:gap-8 h-16 fixed top-0 ${
+      className={`flex flex-row lg:items-center w-full lg:justify-center lg:gap-8 h-16 fixed sm:gap-8 sm:z-10 lg:z-10 top-0 ${
         darkMode ? "bg-black " : "bg-gray-100"
       }  `}
     >
+      {isDropdown ? (
+        <X
+          size={24}
+          onClick={raise}
+          className={`lg:hidden mt-4 ml-2 ${
+            darkMode ? "text-white " : "text-black"
+          } `}
+        />
+      ) : (
+        <List
+          size={24}
+          onClick={dropIt}
+          className={`lg:hidden mt-4 ml-2 ${
+            darkMode ? "text-white " : "text-black"
+          } `}
+        />
+      )}
+
       <h1
-        className={`lg:text-2xl sm:text-lg font-semibold lg:mr-48 ${
+        className={`lg:text-2xl sm:text-lg font-semibold lg:-ml-84 ${
           darkMode ? "text-white" : "text-black"
         }`}
       >
         {getPageName(pathname)}
       </h1>
-      <h1 className=" lg:hidden sm-block text-md font-bold text-black ml-8">Logo</h1>
-    {/*  <button
-        className=" rounded-md w-64 h-10 bg-gray-300 flex flex-row pt-2"
-        onClick={newExpense}
-      >
-        <p className="font-bold rounded-full w-8 text-2xl bg-blue-700 text-white -mt-1">
-          +
-        </p>
-        <h1 className="text-blue-500">Create New Expense</h1>
-      </button> */}
-      <div className="flex items-center lg:ml-12 sm:mr-12 ">
+
+  
+      <div className="flex items-center lg:ml-12 sm:-ml-24 sm:mt-4  ">
         <label
           htmlFor="toggle"
           className={`relative block h-[1.8rem] w-[3.4rem] cursor-pointer rounded-full bg-purple-600 before:absolute before:left-2 before:top-[4px] before:h-[1.3rem] before:w-[1.3rem] before:rounded-full before:bg-white before:transition-all before:duration-300 
@@ -84,7 +115,7 @@ return (
           className={` ${darkMode ? "text-white" : "text-black"}`}
         />
       </div>
-      <div className=" flex absolute lg:right-20 gap-x-4 pt-2">
+      <div className=" flex absolute lg:right-20 gap-x-4 pt-2 sm:right-4">
         <Link href="/notifications">
           <Bell
             size={35}
@@ -100,27 +131,65 @@ return (
             darkMode ? "bg-white" : "bg-black"
           } w-[0.2rem] pb-8`}
         ></div>
-        <div className="flex flex-row gap-x-2 pt-2">
+        <div className="flex flex-row gap-x-2 pt-2 ">
           <Link href="/profile">
             <User
               size={35}
               className="rounded-full p-2 bg-gray-400 text-black "
             />
           </Link>
-          <h1 className={`${darkMode ? "text-white" : "text-black"}`}>
-            Rahman
+          <h1
+            className={`${
+              darkMode ? "text-white" : "text-black"
+            } sm:text-[0.4rem] lg:text-[1.1rem] sm:mt-2`}
+          >
+            {name}
           </h1>
         </div>
       </div>
     </div>
-    {ispopUp && (
-      <div className=" flex flex-col items-center w-96 h-4 pt-4 sm:mr-8 lg:ml-[30rem]">
-        <Create setIspopUp={setIspopUp} />
+    {isDropdown ? (
+      <div className=" lg:hidden sm:block flex flex-col mt-16  h-[20rem] max-w-auto bg-white z-30 ">
+        <div className="ml-24">
+          <Header />
+        </div>
+        <Link href="/dashboard">
+          <button className=" text-[0.8rem] font-bold uppercase flex items-center gap-4 hover:bg-gray-300 cursor-pointer text-green-700 focus:bg-gray-400 ml-2 p-3 w-40">
+            <House size={20} /> Dashboard
+          </button>
+        </Link>
+        <Link href="/add">
+          <button className=" text-[0.8rem] font-bold uppercase flex items-center gap-4 hover:bg-gray-300 cursor-pointer text-green-700 focus:bg-gray-400 p-3 ml-2 w-32">
+            <PlusCircle size={20} />
+            Create
+          </button>
+        </Link>
+
+        <Link href="/transactions">
+          <button className=" text-[0.8rem] font-bold uppercase flex items-center gap-4 hover:bg-gray-300 cursor-pointer text-green-700 focus:bg-gray-400 p-3 ml-2 w-40">
+            <CurrencyDollar size={20} /> transactions
+          </button>
+        </Link>
+        <Link href="/notifications">
+          <button
+            onClick={reset}
+            className=" text-[0.8rem] font-bold uppercase flex items-center gap-4 hover:bg-gray-300 cursor-pointer text-green-700 focus:bg-gray-400 p-3 ml-2 w-40"
+          >
+            <BellRinging size={20} />
+            notifications
+          </button>
+        </Link>
+    
+        <Link href="/about">
+          <button className=" text-[0.8rem] font-bold uppercase flex items-center gap-4 hover:bg-gray-300 cursor-pointer text-green-700 focus:bg-gray-400 p-3 ml-2 w-32">
+            <ChatTeardropDots size={20} /> About
+          </button>
+        </Link>
       </div>
-    )}
+    ) : null}
   </>
 );
 
 }
 
-export default Header
+export default Navbar

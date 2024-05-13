@@ -1,12 +1,12 @@
 import React from 'react';
-import Naira1 from '../../../public/Naira bg.png';
+import Naira1 from '../../../public/dollar-sign-covered.jpg';
 import Dollar2 from "../../../public/Dollar background.jpg";
 import Dollar3 from "../../../public/dollar bg-2.jpg";
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 const Cards = () => {
     const { expenses } = useSelector((state) => state.ui);
-    const { revenues } = useSelector((state) => state.ui);
+    const { revenues } = useSelector((state) => state.revenue);
 
    
 
@@ -20,39 +20,36 @@ const totalRevenue = revenues.reduce(
 );
 const totalBalance = totalRevenue + totalExpense;
 
-// Format totalExpense, totalRevenue, and totalBalance
-const formattedTotalExpense = totalExpense.toLocaleString();
-const formattedTotalRevenue = totalRevenue.toLocaleString();
-const formattedTotalBalance = totalBalance.toLocaleString();
+
 return (
-    <div className="flex lg:flex-row sm:flex-col lg:gap-x-10 mt-8 ">
-      <div className=" rounded-md  border-2 text-white w-56 h-32 relative overflow-hidden ">
+    <div className="flex lg:flex-row sm:flex-col lg:gap-x-10 sm:gap-y-6  lg:mt-8 sm:ml-6 ">
+      <div className=" rounded-md  border-2 text-white lg:w-56 sm:w-[18.9rem]  h-32 relative overflow-hidden ">
         <Image
           src={Naira1}
           alt="Background Image"
           objectFit=""
           className=" w-full h-full object-cover opacity-90 "
         />
-        <div className="absolute inset-0 text-white text-lg font-bold">
+        <div className="absolute inset-0 text-white text-lg font-bold pl-3">
           <p>Total Revenue</p> <br />
          
           <h1>${totalRevenue}</h1>
         </div>
       </div>
-      <div className=" rounded-md  border-2 text-white w-56 h-32 relative overflow-hidden ">
+      <div className=" rounded-md  border-2 text-white lg:w-56 sm:w-[18.9rem] h-32 relative overflow-hidden ">
         <Image
           src={Dollar2}
           alt="Background Image"
           objectFit=""
           className=" w-full h-full object-cover opacity-80 "
         />
-        <div className="absolute inset-0 text-white text-lg font-bold">
+        <div className="absolute inset-0 text-white text-lg pl-3 font-bold">
           <p>Total Expenses</p> <br />
         
           <h1>${totalExpense}</h1>
         </div>
       </div>
-      <div className=" rounded-md  border-2 text-white w-56 h-32 relative overflow-hidden ">
+      <div className=" rounded-md  border-2 text-white lg:w-56 sm:w-[18.9rem] h-32 relative overflow-hidden ">
         <Image
           src={Dollar3}
           alt="Background Image"
@@ -60,7 +57,7 @@ return (
           objectFit=""
           className=" w-full h-full object-cover opacity-80 "
         />
-        <div className="absolute inset-0 text-white text-lg font-bold">
+        <div className="absolute inset-0 text-white text-lg font-bold pl-3">
           <p className='text-sm'>Total revenue + expense</p> <br />
           
           <h1>${totalBalance}</h1>

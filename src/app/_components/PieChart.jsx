@@ -15,7 +15,8 @@ import {
 Chart.register(ArcElement, LinearScale, CategoryScale, BarElement);
 
 const PieChart = () => {
-  const { expenses, revenues } = useSelector((state) => state.ui);
+  const { expenses } = useSelector((state) => state.ui);
+  const { revenues } = useSelector((state) => state.revenue)
 
   // Calculate total expense
   const totalExpense = expenses.reduce(

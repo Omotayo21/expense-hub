@@ -1,42 +1,37 @@
 "use client"
 import React, { useState, useEffect } from "react";
-import { MagnifyingGlass, PencilSimple, Trash, TrashSimple } from "phosphor-react";
-import { useSelector } from "react-redux";
-import {
-  collection,
-  addDoc,
-  deleteDoc,
-  doc,
-  getDoc,
-  query,
-  querySnapshot,
-  onSnapshot,
-} from "firebase/firestore";
-import { db } from "../../firebase";
+//import { MagnifyingGlass, PencilSimple, Trash, TrashSimple } from "phosphor-react";
+import { useSelector, useDispatch } from "react-redux";
+//import { deleteExpense } from "@/redux/ui-slice";
+//import { deleteRevenue } from "@/redux/revenue-slice";
+import axios from "axios";
 
 const Page = () => {
-  const { darkMode } = useSelector((state) => state.ui);
-  const { expenses, revenues } = useSelector((state) => state.ui);
+  const dispatch = useDispatch()
+  const { darkMode, expenses } = useSelector((state) => state.ui);
+  const { revenues } = useSelector((state) => state.revenue);
   const today = new Date().toLocaleDateString();
-  const [sortedExpenses, setSortedExpenses] = useState([...expenses]);
-  const [sortedRevenues, setSortedRevenues] = useState([...revenues]);
+  const [sortedExpenses, setSortedExpenses] = useState([]);
+  const [sortedRevenues, setSortedRevenues] = useState([]);
   const [sortOrder, setSortOrder] = useState("asc");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResultsExist, setSearchResultsExist] = useState(true);
 
-  const remove = async (id) => {
-    await deleteDoc(doc(db, "expenses", id));
-    };
+
   
 
   useEffect(() => {
     // Update sorted expenses whenever expenses change
-    setSortedExpenses([...expenses]);
+    if(Array.isArray(expenses))
+    {
+    setSortedExpenses(expenses);}
   }, [expenses]);
 
   useEffect(() => {
-    // Update sorted revenues whenever revenues change
-    setSortedRevenues([...revenues]);
+      if (Array.isArray(revenues)) {
+        setSortedRevenues(revenues);
+      }
+
   }, [revenues]);
 
   // Function to sort expenses by amount
@@ -73,12 +68,35 @@ const Page = () => {
       filteredExpenses.length > 0 || filteredRevenues.length > 0
     );
   };
+     const [dataid, setData] = useState("");
 
+     const getUserDetails = async () => {
+       const res = await axios.get("/api/users/me");
+       console.log(res.data);
+       setData(res.data.data._id);
+     };
+     useEffect(() => {
+       getUserDetails();
+     }, []);
+const handleDeleteExpense = async (expenseId) => {
+
+  try {
+ await axios.delete(`/api/users/${dataid}/deleteExpense/${expenseId}`);
+
+} catch (error) {
+   console.error('couldnt delete', error) 
+  }
+
+}
+const handleDeleteRevenue = async (revenueId) => {
+  await axios.delete("/api/users/deleteRevenue", { dataid, revenueId });
+//dispatch(deleteRevenue(revenueId))
+
+ 
+}
   return (
     <div
-      className={`flex ${
-        darkMode ? "bg-gray-700" : "lg:bg-gray-200 sm:bg-white"
-      } min-h-screen`}
+      className={`flex min-h-screen`}
     >
       <div className="flex flex-col mt-24 lg:ml-64">
         <div className="lg:ml-12 flex lg:flex-row sm:flex-col items-center sm:gap-y-2 lg:gap-x-10">
@@ -120,7 +138,7 @@ const Page = () => {
             >
               EXPENSES
             </h1>
-            <div className="lg:ml-16 sm:ml-2 sm:mr-2 mt-8 sm:max-w-sm lg:max-w-[62rem] mx-auto bg-gray-100 rounded-sm border border-green-400 sm:p-4 sm:overflow-x-auto ">
+            <div className="lg:ml-16 sm:ml-2  mt-8 sm:max-w-[22rem] lg:max-w-[62rem] md:max-w-[50rem] mx-auto bg-gray-100 rounded-sm border border-green-400 sm:p-4 sm:overflow-x-auto ">
               {sortedExpenses.length === 0 ? (
                 <h1>No Transactions yet</h1>
               ) : (
@@ -132,11 +150,11 @@ const Page = () => {
                       <div>Title</div>
                       <div>Amount</div>
                       <div>Type</div>
-                      <div>Delete</div>
+                      <div>Transaction Id</div>
                     </div>
-                    {sortedExpenses.map((expense, id) => (
+                    {sortedExpenses.map((expense) => (
                       <div
-                        key={id}
+                        key={expense._id}
                         className="grid grid-cols-6 text-black gap-18  lg:mt-2 border-b border-blue-800 py-2"
                       >
                         <div>{expense.category}</div>
@@ -145,9 +163,10 @@ const Page = () => {
                         <div>${expense.amount}</div>
                         <div>Expense</div>
                         <div>
-                          <button className="">
+                          {/*<button className="" onClick={() => handleDeleteExpense( expense._id)}>
                             <TrashSimple size={20} color="blue" className="" />
-                          </button>
+                    </button>*/}
+                    {expense._id}
                         </div>
                       </div>
                     ))}
@@ -162,7 +181,7 @@ const Page = () => {
             >
               REVENUES
             </h1>
-            <div className="lg:ml-16 sm:ml-2 sm:mr-2 mt-8 sm:max-w-sm lg:max-w-[62rem] mx-auto bg-gray-100 rounded-sm border border-green-400 sm:p-4 sm:overflow-x-auto">
+            <div className="lg:ml-16 sm:ml-2 sm:mr-2 mt-8 sm:max-w-[22rem] lg:max-w-[62rem] md:max-w-[50rem] mx-auto bg-gray-100 rounded-sm border border-green-400 sm:p-4 sm:overflow-x-auto">
               {sortedRevenues.length === 0 ? (
                 <h1>No Transactions yet</h1>
               ) : (
@@ -174,11 +193,11 @@ const Page = () => {
                       <div>Title</div>
                       <div>Amount</div>
                       <div>Type</div>
-                      <div>Delete</div>
+                      <div>Transaction Id</div>
                     </div>
-                    {sortedRevenues.map((revenue, index) => (
+                    {sortedRevenues.map((revenue) => (
                       <div
-                        key={index}
+                        key={revenue._id}
                         className="grid grid-cols-6 gap-18 text-black lg:mt-2 border-b border-blue-800 py-2"
                       >
                         <div>Income</div>
@@ -186,10 +205,11 @@ const Page = () => {
                         <div>{revenue.name}</div>
                         <div>${revenue.amount}</div>
                         <div>Revenue</div>
-                        <div>
-                          <button className="">
-                            <PencilSimple size={20} color="blue" />
-                          </button>
+                        <div> {/*
+                          <button className="" onClick={() => handleDeleteRevenue(revenue._id)}>
+                            <TrashSimple size={20} color="blue" />
+                    </button>*/}
+                    {revenue._id}
                         </div>
                       </div>
                     ))}

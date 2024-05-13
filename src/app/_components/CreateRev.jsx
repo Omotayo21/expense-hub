@@ -1,30 +1,51 @@
 "use client";
 import React, { useEffect, useState } from "react";
-
-import { addRevenue, incrementNotificationCount } from "@/redux/ui-slice";
+import axios from "axios";
+import { addRevenue, addRevenueFailure, incrementNotificationCount } from "../../redux/revenue-slice";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
 
-const Create = ({ setIspopUp }) => {
+const Create = () => {
   const dispatch = useDispatch();
  
-  const [expense, setExpense] = useState([]);
-  const [total, setTotal] = useState(0);
+   const [dataid, setData] = useState("nothing");
+
+   const getUserDetails = async () => {
+     const res = await axios.get("/api/users/me");
+     console.log(res.data);
+     setData(res.data.data._id);
+   };
+   useEffect(() => {
+     getUserDetails();
+   }, []);
   const [newRevenue, setNewRevenue] = useState({
   
     name: "",
     amount: "",
   });
   const [empty, setEmpty] = useState(false);
-  const handleAddRevenue = () => {
+  const handleAddRevenue = async () => {
     if (newRevenue.name !== "" && newRevenue.amount !== "" ) {
-      const revenue = {
-      
+     const revenueItem = {
+       id:uuidv4(),
         name: newRevenue.name,
         amount: newRevenue.amount,
       };
-      dispatch(addRevenue(revenue));
+       try {
+
+const response = await axios.post('/api/users/revenues',{dataid, revenueItem})
+dispatch(addRevenue(response.data))
+toast.success('Revenue added successfully')
+
+      } catch (error) {
+        dispatch(addRevenueFailure(error.message))
+        console.error('error adding revenuees', error)
+      }
+      //dispatch(addRevenue(revenueItem));
+      //dispatch(addRevenueAsync(revenueItem))
       dispatch(incrementNotificationCount());
-      console.log(revenue);
+      console.log(revenueItem);
     
       setNewRevenue({ name: "", amount: "", });
     }

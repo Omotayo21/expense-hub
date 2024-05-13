@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Expense Tracker App
+
+This is a Expense Tracker app built with Next.js, Mongoose, MongoDB, jwttoken, bcryptjs, react-chart-js, Nodemailer, Tailwind CSS and Redux, . 
+
+## Features
+
+- **Add Expense and Revenue:**
+ -Users can select categories, add expenses and revenues,
+ -Users will get notified when expense is sucessfully added
+ -Users can view their transaction history in the transaction page
+
+- **User Interface:**
+  - Responsive design using Tailwind CSS.
+  - Notifications using react-toastify.
+
+
+
+
 
 ## Getting Started
 
-First, run the development server:
+1. **Clone the Repository:**
+   ```bash
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+   git clone https://github.com/your-username/expense-hub.git
+   cd expense-hub
+      ```
+2. **Install Dependencies:**
+
+  ```bash
+
+  npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. **Set Up MongoDB atlas:**
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+   Create a Atlas cluster and connect using mongoDB compass
+   
+4. **Run the App:**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+  ```bash
 
-## Learn More
+   npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+5. **Open in Browser:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open http://localhost:3000 in your browser.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Folder Structure
+src/: Source code of the application.
+_components/: Reusable React components.
+(shared-layout) : Top-level components representing pages.
 
-## Deploy on Vercel
+middleware/: For authentication
+redux/: Redux store setup.
+models/ : mongoDb model structure
+helpers/: 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contributing
+Contributions are welcome! If you find a bug or have a feature request, please open an issue. If you want to contribute, please fork the repository and create a pull request.
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+
+
+
+
+
+
