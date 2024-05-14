@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import Image from 'next/image'
-import logo from '../../../public/Dark-Logo.png'
+import logo from '../../../public/Dark logo.png'
 
 const Header = () => {
   return (
