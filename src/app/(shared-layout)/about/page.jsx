@@ -1,6 +1,6 @@
 'use client'
 import React from "react";
-import { WhatsappLogo, TwitterLogo, Envelope, GithubLogo } from "phosphor-react";
+
 
  const About = () => {
 return (
@@ -14,7 +14,7 @@ return (
         The Expense Tracker is a user-friendly application designed to help you
         manage your finances efficiently. With amazing features and a clean
         interface, it allows you to easily track your expenses, categorize
-        transactions, set budgets, and analyze spending patterns with the aids of charts. Whether you're
+        transactions, set budgets, and analyze spending patterns with the aids of charts. Whether you are
         budgeting for personal expenses or managing finances for your business,
         our Expense Tracker provides the tools you need to stay organized and in
         control of your money. Say goodbye to financial stress and hello to

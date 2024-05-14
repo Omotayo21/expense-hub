@@ -5,7 +5,7 @@ import Image from "next/image";
 const Spinner = () => {
   return (
     <div>
-      <Image src={rolling} className="text-blue-700"  />
+      <Image src={rolling} className="text-blue-700" alt="spinner"  />
     </div>
   );
 };

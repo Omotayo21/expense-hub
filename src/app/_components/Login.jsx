@@ -183,7 +183,7 @@ useEffect(()=> {
                 </button>
 
                 <p className="text-sm font-light text-black-500">
-                  Don't have an account yet?{" "}
+                  Don&apos;t have an account yet?{" "}
                   <Link
                     href="/signup"
                     className="font-medium text-green-600 hover:underline "

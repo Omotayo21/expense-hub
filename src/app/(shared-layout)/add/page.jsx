@@ -2,9 +2,9 @@
 import React from "react";
 import Create from "../../_components/Create";
 import CreateRev from "../../_components/CreateRev"
-import { useSelector } from "react-redux";
-const newExpense = () => {
-  const {darkMode} = useSelector((state) => state.ui)
+
+const NewExpense = () => {
+ 
   return (
     <div className={`min-h-screen flex lg:flex-row sm:flex-col mt-12 gap-x-8 justify-center items-center `}>
       <Create />
@@ -15,4 +15,4 @@ const newExpense = () => {
   );
 };
 
-export default newExpense;
+export default NewExpense;

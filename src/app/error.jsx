@@ -6,7 +6,7 @@ const error = () => {
   return (
     <div className='flex flex-col items-center justify-center'>
       <h2 className='font-bold text-xl text-red-700'>Error page</h2>
-<p className='text-lg'>Sorry this page doesn't exist</p>
+<p className='text-lg'>Sorry this page does not exist</p>
 <Link>
 <button className='bg-green-700 text-white w-64 p-2 rounded-md'> 
   Click here to go back to homepage

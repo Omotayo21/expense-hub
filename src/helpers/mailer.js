@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer'
 import User from '../models/userModel'
 import bcryptjs from 'bcryptjs';
-import { getMaxListeners } from 'nodemailer/lib/xoauth2';
+
 
 
 export const sendEmail = async ({email, emailType, userId}) => {

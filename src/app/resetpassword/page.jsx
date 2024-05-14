@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Header from "../_components/Header";
 
-const forgotPasswordReset = () => {
+const ForgotPasswordReset = () => {
     const [token, setToken] = useState('')
       const [newpassword, setNewPassword] = useState('')
         const [confirmNewPassword, setConfirmNewPassword] = useState('')
@@ -80,4 +80,4 @@ type="password"
 )
 }
 
-export default forgotPasswordReset
+export default ForgotPasswordReset

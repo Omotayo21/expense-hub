@@ -1,5 +1,5 @@
 "use client"
-import React, {useState, useEffect} from "react";
+import React, { useEffect} from "react";
 import Header from "../_components/Navbar";
 
 import Sidebar from "../_components/Sidebar";
@@ -11,16 +11,16 @@ import { setRevenue } from "../../redux/revenue-slice"
 import axios from 'axios';
 
 
-export default function sharedLayout({ children }) {
+export default function SharedLayout({ children }) {
   const dispatch = useDispatch()
-       const fetchExpenses = async () => {
+       const FetchExpenses = async () => {
          const res = await axios.get("/api/users/me");
          console.log(res.data);
 
          const userExpenses = res.data.data.expenses;
          dispatch(setExpenses(userExpenses));
        };
-       const fetchRevenues = async () => {
+       const FetchRevenues = async () => {
          const res = await axios.get("/api/users/me");
          console.log(res.data);
 
@@ -28,8 +28,8 @@ export default function sharedLayout({ children }) {
          dispatch(setRevenue(userRevenues));
        };
         useEffect(() => {
-          fetchExpenses();
-          fetchRevenues()
+          FetchExpenses();
+          FetchRevenues()
         }, []);
 
    const { darkMode } = useSelector((state) => state.ui);

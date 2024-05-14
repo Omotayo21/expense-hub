@@ -1,9 +1,8 @@
 "use client";
-import axios from "axios";
-import Link from "next/link";
-import React, { useState, useEffect } from "react";
 
-export default function verifyEmailPage() {
+import React from "react";
+
+export default function VerifyEmailSucessfulPage() {
  
  
   return (

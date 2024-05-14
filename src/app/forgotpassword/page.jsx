@@ -6,7 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-const forgotPasswordMail = () => {
+const ForgotPasswordMail = () => {
     const router = useRouter()
     const [email, setMail] = useState('')
     const [loading, setLoading] = useState(false)
@@ -54,4 +54,4 @@ onClick={submit}> Submit</button>
 )
 }
 
-export default forgotPasswordMail
+export default ForgotPasswordMail

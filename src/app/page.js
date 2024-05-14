@@ -1,5 +1,4 @@
-import background from "../../public/background.svg";
-import Image from "next/image";
+
 import Login from "./_components/Login";
 import Header from "./_components/Header";
 
