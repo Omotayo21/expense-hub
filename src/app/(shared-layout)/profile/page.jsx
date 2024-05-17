@@ -6,7 +6,7 @@ import Link from 'next/link';
 import axios from 'axios';
 
 
-const Profile = () => {
+const Page = () => {
   const router = useRouter()
   const [data, setData] = useState('nothing')
   const [name, setName] = useState('No name yet')
@@ -72,4 +72,4 @@ useEffect(() => {
   );
 }
 
-export default Profile;
+export default Page;

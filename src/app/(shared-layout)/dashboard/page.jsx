@@ -7,7 +7,7 @@ import Cards from "../../_components/Cards";
 
 import { useSelector } from "react-redux";
 
-const Dashboard = () => {
+const Page = () => {
   const { darkMode, expenses } = useSelector((state) => state.ui);
   const { revenues } = useSelector((state) => state.revenue)
   const sortedExpenses = [...expenses].sort((a, b) => b.amount - a.amount);
@@ -84,4 +84,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Page;

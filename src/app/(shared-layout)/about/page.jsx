@@ -2,7 +2,7 @@
 import React from "react";
 
 
- const About = () => {
+ const Page = () => {
 return (
   <>
     <div className=" text-center">
@@ -26,4 +26,4 @@ return (
 );
 
 };
-export default About;
+export default Page;

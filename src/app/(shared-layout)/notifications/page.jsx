@@ -3,7 +3,7 @@ import React from "react";
 import { BellRinging, Bell } from "phosphor-react";
 import { useSelector } from "react-redux";
 
-const Notifications = () => {
+const Page = () => {
   const { darkMode, expenses } = useSelector((state) => state.ui);
   const { revenues} = useSelector((state) => state.revenue);
  
@@ -89,4 +89,4 @@ const Notifications = () => {
   );
 };
 
-export default Notifications;
+export default Page;

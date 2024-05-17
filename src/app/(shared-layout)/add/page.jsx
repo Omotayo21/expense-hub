@@ -3,7 +3,7 @@ import React from "react";
 import Create from "../../_components/Create";
 import CreateRev from "../../_components/CreateRev"
 
-const NewExpense = () => {
+const Page = () => {
  
   return (
     <div className={`min-h-screen flex lg:flex-row sm:flex-col mt-12 gap-x-8 justify-center items-center `}>
@@ -15,4 +15,4 @@ const NewExpense = () => {
   );
 };
 
-export default NewExpense;
+export default Page;

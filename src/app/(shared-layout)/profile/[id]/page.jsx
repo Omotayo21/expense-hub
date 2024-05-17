@@ -2,7 +2,7 @@
 import React from 'react';
 //import { UserCircle } from 'phosphor-react';
 
-const UserProfile = ({params}) => {
+const Page = ({params}) => {
   return (
     <div className="flex flex-col items-center justify-center gap-y-8 mt-16">
       <h2 className="font-bold text-lg ">My Account <span>{params.id}</span></h2>
@@ -23,4 +23,4 @@ const UserProfile = ({params}) => {
   );
 }
 
-export default UserProfile;
+export default Page;
