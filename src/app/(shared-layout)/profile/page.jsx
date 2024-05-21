@@ -45,17 +45,17 @@ useEffect(() => {
           Profile Information
         </h2>
         <div className="flex flex-row gap-x-2">
-          <label className="text-[1rem] font-semibold">Display Name : </label>
+          <label className="text-[0.8rem] font-semibold">Display Name : </label>
           <p>{name}</p>
         </div>
         <div className="flex flex-row gap-x-2">
           {" "}
-          <label className="text-[1rem] font-semibold">Email Adress : </label>
+          <label className="text-[0.7rem] font-semibold">Email Adress : </label>
           <p>{email}</p>
         </div>
         <div className="flex flex-row gap-x-2">
           {" "}
-          <label className="text-[1rem] font-semibold">User Id : </label>
+          <label className="text-[0.8rem] font-semibold">User Id : </label>
           <p>{data}</p>
         </div>
       </div>
