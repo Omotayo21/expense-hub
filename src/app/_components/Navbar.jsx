@@ -95,7 +95,7 @@ return (
       </h1>
 
   
-      <div className="flex items-center lg:ml-12 sm:-ml-24 sm:mt-4  ">
+     {/*<div className="flex items-center lg:ml-12 sm:-ml-24 sm:mt-4  ">
         <label
           htmlFor="toggle"
           className={`relative block h-[1.8rem] w-[3.4rem] cursor-pointer rounded-full bg-purple-600 before:absolute before:left-2 before:top-[4px] before:h-[1.3rem] before:w-[1.3rem] before:rounded-full before:bg-white before:transition-all before:duration-300 
@@ -114,7 +114,8 @@ return (
           size={20}
           className={` ${darkMode ? "text-white" : "text-black"}`}
         />
-      </div>
+      </div> */}
+     
       <div className=" flex absolute lg:right-20 gap-x-4 pt-2 sm:right-4">
         <Link href="/notifications">
           <Bell
