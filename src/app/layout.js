@@ -13,7 +13,24 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const FetchExpenses = async () => {
+         const res = await axios.get("/api/users/me");
+         console.log(res.data);
 
+         const userExpenses = res.data.data.expenses;
+         dispatch(setExpenses(userExpenses));
+       };
+       const FetchRevenues = async () => {
+         const res = await axios.get("/api/users/me");
+         console.log(res.data);
+
+         const userRevenues = res.data.data.revenues;
+         dispatch(setRevenue(userRevenues));
+       };
+        useEffect(() => {
+          FetchExpenses();
+          FetchRevenues()
+        }, []);
   return (
     <html lang="en">
       <body className={inter.className}>
