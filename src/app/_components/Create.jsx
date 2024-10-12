@@ -6,7 +6,7 @@ import {
   addExpense,
   incrementNotificationCount,
   addExpenseFailure,
-  setExpense,
+  setExpenses,
 } from "../../redux/ui-slice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
