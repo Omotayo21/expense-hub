@@ -6,6 +6,7 @@ import {
   addExpense,
   incrementNotificationCount,
   addExpenseFailure,
+  setExpense,
 } from "../../redux/ui-slice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
@@ -49,6 +50,13 @@ const Create = () => {
     name: "",
     amount: "",
   });
+  const FetchExpenses = async () => {
+         const res = await axios.get("/api/users/me");
+         console.log(res.data);
+
+         const userExpenses = res.data.data.expenses;
+         dispatch(setExpenses(userExpenses));
+  }
   const [empty, setEmpty] = useState(false);
   const handleAddExpense = async () => {
     if (newExpense.name !== "" && newExpense.amount !== "" && category !== "") {
@@ -64,6 +72,7 @@ const Create = () => {
           expenseItem,
         });
         dispatch(addExpense(response.data));
+        FetchExpenses()
       } catch (error) {
         dispatch(addExpenseFailure(error.message));
         console.error("error adding expenses", error);
